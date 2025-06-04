@@ -46,7 +46,7 @@ A aplicação estará disponível na **porta 80**.
 
 ## 🛠 Tecnologias
 
-- Java 17 + Spring Boot
+- Java 21 + Spring Boot
 - PostgreSQL (via Docker)
 - Angular (frontend separado)
 
