@@ -1,0 +1,82 @@
+<mat-card class="busca-container">
+  <div class="form-busca-content">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Número da NFS-e ou do Crédito</mat-label>
+      <input matInput [(ngModel)]="termoBusca" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="consultarCreditos()" [disabled]="carregando">
+      <span *ngIf="!carregando">Buscar</span>
+      <mat-spinner *ngIf="carregando" [diameter]="20"></mat-spinner>
+    </button>
+  </div>
+</mat-card>
+
+<mat-spinner
+  *ngIf="carregando"
+  diameter="50"
+  class="spinner-centralizado"
+></mat-spinner>
+
+<mat-card *ngIf="dataSource.data.length > 0" class="resultado-container">
+  <h2>Resultados da Consulta</h2>
+
+  <div class="tabela-container">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <ng-container matColumnDef="numeroCredito">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Número do Crédito</th>
+        <td mat-cell *matCellDef="let credito" data-label="Número do Crédito">{{ credito.numeroCredito }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="numeroNfse">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Número da NFS-e</th>
+        <td mat-cell *matCellDef="let credito" data-label="Número da NFS-e">{{ credito.numeroNfse }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataConstituicao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data de Constituição</th>
+        <td mat-cell *matCellDef="let credito" data-label="Data de Constituição">
+          {{ credito.dataConstituicao | date: 'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="valorIssqn">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor ISSQN</th>
+        <td mat-cell *matCellDef="let credito" data-label="Valor ISSQN">
+          {{ credito.valorIssqn | currency: 'BRL':'symbol':'1.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipoCredito">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de Crédito</th>
+        <td mat-cell *matCellDef="let credito" data-label="Tipo de Crédito">
+          {{ credito.tipoCredito }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let credito" data-label="Ações">
+          <button mat-raised-button color="accent" (click)="verDetalhes(credito.numeroCredito)">Ver Detalhes</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+</mat-card>
+
+<mat-card *ngIf="mensagemErro && !carregando" color="warn" class="erro-container">
+  <p>{{ mensagemErro }}</p>
+</mat-card>
+
+<mat-card
+  *ngIf="!mensagemErro && dataSource.data.length === 0 && termoBusca.length > 0 && !carregando"
+  class="sem-resultados"
+>
+  <p>Nenhum crédito encontrado para a sua busca.</p>
+</mat-card>
