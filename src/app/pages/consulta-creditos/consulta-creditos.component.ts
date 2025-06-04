@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CreditoService } from '../../services/credito.service';
 import { Credito } from '../../models/credito.model';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http'; // Importe para tratar erros HTTP
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,13 +15,6 @@ import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource } from '@angular/material/table';
-
-interface ErrorHandlerDto {
-  status: number;
-  error: string;
-  message: string;
-  dateTime: string;
-}
 
 @Component({
   selector: 'app-consulta-creditos',
@@ -87,7 +80,7 @@ export class ConsultaCreditosComponent implements AfterViewInit {
         }
       }
     });
-    
+
   }
 
   private buscarPorNumeroCredito(): void {
