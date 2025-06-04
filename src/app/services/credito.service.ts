@@ -11,7 +11,9 @@ export class CreditoService {
   
     private apiUrl = environment.apiUrl;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        console.log('Ambiente:', environment);
+    }
 
     buscarPorNumeroNfse(numeroNfse: string): Observable<Credito[]> {
         return this.http.get<Credito[]>(`${this.apiUrl}/${numeroNfse}`);
