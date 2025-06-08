@@ -1,29 +1,28 @@
 <div class="container">
-  <button mat-raised-button color="basic" (click)="voltar()" class="botao-voltar">Voltar para a Consulta</button>
+  <div *ngIf="carregando" class="spinner-centralizado"></div>
 
-  <mat-card *ngIf="credito && !carregando" class="card-detalhes-credito">
-    <mat-card-title>Detalhes do Crédito</mat-card-title>
-    <mat-card-content>
-      <p><strong>Número do Crédito:</strong> {{ credito.numeroCredito }}</p>
-      <p><strong>Número da NFS-e:</strong> {{ credito.numeroNfse }}</p>
-      <p><strong>Data de Constituição:</strong> {{ credito.dataConstituicao | date:'dd/MM/yyyy' }}</p>
-      <p><strong>Valor ISSQN:</strong> {{ credito.valorIssqn | currency:'BRL':'symbol':'1.2-2' }}</p>
-      <p><strong>Tipo de Crédito:</strong> {{ credito.tipoCredito }}</p>
-      <p><strong>Simples Nacional:</strong> {{ credito.simplesNacional ? 'Sim' : 'Não' }}</p>
-      <p><strong>Alíquota:</strong> {{ credito.aliquota }}%</p>
-      <p><strong>Valor Faturado:</strong> {{ credito.valorFaturado | currency:'BRL':'symbol':'1.2-2' }}</p>
-      <p><strong>Valor Dedução:</strong> {{ credito.valorDeducao | currency:'BRL':'symbol':'1.2-2' }}</p>
-      <p><strong>Base de Cálculo:</strong> {{ credito.baseCalculo | currency:'BRL':'symbol':'1.2-2' }}</p>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-spinner *ngIf="carregando" diameter="50" class="spinner-centralizado"></mat-spinner>
-
-  <mat-card *ngIf="mensagemErro && !carregando" color="warn" class="erro-container">
+  <div *ngIf="mensagemErro && !carregando" class="erro-container">
     <p>{{ mensagemErro }}</p>
-  </mat-card>
+  </div>
 
-  <mat-card *ngIf="!credito && !carregando && !mensagemErro" class="sem-resultados">
+  <div *ngIf="credito && !carregando" class="card-detalhes-credito">
+    <h2>Detalhes do Crédito</h2>
+    <p><strong>Número do Crédito:</strong> {{ credito.numeroCredito }}</p>
+    <p><strong>Número da NFS-e:</strong> {{ credito.numeroNfse }}</p>
+    <p><strong>Data de Constituição:</strong> {{ credito.dataConstituicao | date:'dd/MM/yyyy' }}</p>
+    <p><strong>Valor ISSQN:</strong> {{ credito.valorIssqn | currency:'BRL':'symbol':'1.2-2' }}</p>
+    <p><strong>Tipo de Crédito:</strong> {{ credito.tipoCredito }}</p>
+    <p><strong>Simples Nacional:</strong> {{ credito.simplesNacional ? 'Sim' : 'Não' }}</p>
+    <p><strong>Alíquota:</strong> {{ credito.aliquota }}%</p>
+    <p><strong>Valor Faturado:</strong> {{ credito.valorFaturado | currency:'BRL':'symbol':'1.2-2' }}</p>
+    <p><strong>Valor Dedução:</strong> {{ credito.valorDeducao | currency:'BRL':'symbol':'1.2-2' }}</p>
+    <p><strong>Base de Cálculo:</strong> {{ credito.baseCalculo | currency:'BRL':'symbol':'1.2-2' }}</p>
+  </div>
+
+  <div *ngIf="!credito && !carregando && !mensagemErro" class="sem-resultados">
     <p>Nenhum detalhe de crédito encontrado.</p>
-  </mat-card>
+  </div>
+
+  <button class="botao-voltar" (click)="voltar()">Voltar para a Consulta</button>
+
 </div>

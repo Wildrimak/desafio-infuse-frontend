@@ -1,24 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CreditoService } from '../../services/credito.service';
 import { Credito } from '../../models/credito.model';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 @Component({
   selector: 'app-resultado-creditos',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatProgressSpinnerModule
-  ],
+  imports: [CommonModule],
   templateUrl: './resultado-creditos.component.html',
   styleUrls: ['./resultado-creditos.component.scss']
 })
@@ -65,8 +56,7 @@ export class ResultadoCreditosComponent implements OnInit {
       this.mensagemErro = `Erro: ${error.error.message}`;
     } else if (error.status === 404) {
       this.mensagemErro = `Nenhum crédito encontrado com o número informado.`;
-    }
-    else {
+    } else {
       this.mensagemErro = `Erro de comunicação com o servidor: ${error.status} - ${error.statusText || 'Erro desconhecido'}.`;
     }
   }
@@ -74,5 +64,5 @@ export class ResultadoCreditosComponent implements OnInit {
   voltar(): void {
     this.location.back();
   }
-
+  
 }

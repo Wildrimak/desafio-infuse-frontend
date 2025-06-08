@@ -1,76 +1,108 @@
+$background-color: #121212;
+$card-bg: #1e1e1e;
+$text-color: #ffffff;
+$accent-color: #03dac6;
+$error-bg: #b00020;
+$error-text: #ffffff;
+
 .container {
-  padding: 20px;
   max-width: 700px;
   margin: 20px auto;
+  padding: 2rem;
+  background-color: $background-color;
+  color: $text-color;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 12px;
 }
 
 .botao-voltar {
-  margin-bottom: 20px;
   width: 100%;
-  @media (min-width: 600px) {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  background-color: transparent;
+  border: 2px solid $accent-color;
+  color: $accent-color;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $accent-color;
+    color: #000;
+  }
+
+  @media (min-width: 769px) {
     width: auto;
+    padding: 0.5rem 1.5rem;
   }
 }
 
 .card-detalhes-credito {
-  margin-top: 20px;
-  padding: 20px;
+  background-color: $card-bg;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  margin-bottom: 1rem;
 
-  mat-card-title {
-    margin-bottom: 15px;
+  h2 {
+    margin-bottom: 1.2rem;
     text-align: center;
+    font-weight: 600;
   }
 
   p {
-    margin-bottom: 10px;
-    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+
+    strong {
+      color: $accent-color;
+      min-width: 160px;
+      display: inline-block;
+    }
   }
 
-  strong {
-    color: #333;
-    display: inline-block;
-    min-width: 150px;
-  }
-
-
-  @media (max-width: 599px) {
+  @media (max-width: 768px) {
     p {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-bottom: 15px;
+      margin-bottom: 1rem;
     }
     strong {
-      margin-bottom: 5px;
       min-width: unset;
+      margin-bottom: 0.3rem;
     }
   }
 }
 
 .spinner-centralizado {
-  margin: 20px auto;
-  display: block;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid $accent-color;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 3rem auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .erro-container,
 .sem-resultados {
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: $error-bg;
+  color: $error-text;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-top: 1.5rem;
   text-align: center;
-}
-
-.erro-container {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  font-weight: 600;
 }
 
 .sem-resultados {
-  background-color: #e2e3e5;
-  color: #383d41;
-  border: 1px solid #d6d8db;
+  background-color: #2a2a2a;
+  color: #bbb;
+  font-weight: 400;
 }
