@@ -1,127 +1,147 @@
-.full-width {
-  width: 100%;
-}
+@use "sass:color";
 
-.busca-container {
-  margin-bottom: 20px;
-}
+$background-color: #121212;
+$card-bg: #1e1e1e;
+$text-color: #ffffff;
+$accent-color: #03dac6;
 
-.form-busca {
+.container {
+  min-height: 100vh;
   display: flex;
-  gap: 10px;
-  align-items: flex-end;
-  
-  mat-spinner {
-    margin-left: 8px;
-  }
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: $background-color;
+  color: $text-color;
 }
 
-.spinner-centralizado {
-  margin: 20px auto;
-  display: block;
-}
-
-.resultado-container {
-  h2 {
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-}
-
-.erro-container,
-.sem-resultados {
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 4px;
+.search-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.erro-container {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-.sem-resultados {
-  background-color: #e2e3e5;
-  color: #383d41;
-  border: 1px solid #d6d8db;
-}
-
-.tabela-container {
-  overflow-x: auto;
   width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+
+  &.search-top {
+    margin-top: 2rem;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: $card-bg;
+    color: $text-color;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 0 1px color.scale($card-bg, $lightness: 10%);
+  }
+
+  button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: $accent-color;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+  }
 }
 
-table {
-  width: 100%;
-  min-width: 700px;
+.erro {
+  color: red;
+  margin-bottom: 1rem;
+}
 
-  th,
-  td {
-    padding: 10px;
-    text-align: left;
+.resultados {
+  display: none;
+
+  &.stacked {
+    display: block;
   }
 
-  td {
-    position: relative;
-  }
+  .card {
+    background-color: $card-bg;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1.5rem;
 
-  @media (max-width: 768px) {
-    min-width: 100%;
-    
-    thead {
-      display: none;
-    }
-
-    tr {
-      display: block;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 10px;
-    }
-
-    td {
-      display: block;
-      text-align: right;
-      padding-left: 50%;
-      border: none;
-      border-bottom: 1px dashed #eee;
-      
-      &:last-child {
-        border-bottom: none;
-      }
-
-      &::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        width: calc(50% - 20px);
-        font-weight: bold;
-        text-align: left;
-      }
-    }
-    .mat-column-acoes {
-        text-align: center;
-        padding-left: 10px;
-        &::before {
-            display: none;
-        }
-    }
-  }
-
-  @media (max-width: 599px) {
-    .form-busca {
-      flex-direction: column;
-      align-items: stretch;
+    .acoes {
+      margin-top: 1rem;
 
       button {
-        width: 100%;
+        background-color: $accent-color;
+        color: #000;
+        border: none;
+        padding: 0.6rem 1rem;
+        border-radius: 20px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #00bfa5;
+        }
       }
     }
+  }
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #444;
+  }
+
+  th {
+    background-color: #2a2a2a;
+  }
+
+  td button {
+    background-color: $accent-color;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #00bfa5;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .tabela {
+    display: none;
+  }
+
+  .resultados.stacked {
+    display: block;
+
+    .acoes {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .resultados.stacked {
+    display: none;
+  }
+
+  .tabela {
+    display: table;
   }
 }
